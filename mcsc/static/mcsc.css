@@ -1,0 +1,52 @@
+:root {
+  --bg: #f5f6f8; --flaeche: #ffffff; --rand: #dfe2e7; --text: #1d2330; --leise: #667085;
+  --akzent: #3559c7; --gruen: #1f8a4c; --gelb: #b7791f; --rot: #c53030; --blau: #2b6cb0;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #14171d; --flaeche: #1c2028; --rand: #2c323d; --text: #e4e7ec; --leise: #98a2b3;
+          --akzent: #7c9cf5; --gruen: #48bb78; --gelb: #ecc94b; --rot: #fc8181; --blau: #63b3ed; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, "Segoe UI", sans-serif; }
+a { color: var(--akzent); text-decoration: none; } a:hover { text-decoration: underline; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; padding: 12px 20px;
+         background: var(--flaeche); border-bottom: 1px solid var(--rand); }
+header .marke { font-weight: 700; font-size: 18px; letter-spacing: .5px; }
+header .marke small { font-weight: 400; color: var(--leise); font-size: 13px; margin-left: 8px; }
+nav a { margin-right: 18px; color: var(--leise); padding: 4px 0; }
+nav a.an { color: var(--text); border-bottom: 2px solid var(--akzent); }
+main { padding: 20px; max-width: 1400px; margin: 0 auto; }
+h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .6px; color: var(--leise); margin: 28px 0 10px; }
+.raster { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.karte { background: var(--flaeche); border: 1px solid var(--rand); border-radius: 8px; padding: 12px 14px; border-left-width: 4px; }
+.karte.gruen { border-left-color: var(--gruen); } .karte.gelb { border-left-color: var(--gelb); }
+.karte.rot { border-left-color: var(--rot); } .karte.blau { border-left-color: var(--blau); }
+.karte.grau { border-left-color: var(--rand); }
+.karte .kopf { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; }
+.karte .zeit { color: var(--leise); font-weight: 400; font-size: 13px; white-space: nowrap; }
+.karte .fazit { margin-top: 6px; font-size: 13px; color: var(--leise); word-break: break-word; }
+.karte .fehler { margin-top: 6px; font: 12px var(--mono); color: var(--rot); word-break: break-all; }
+.marke-zustand { font-size: 12px; padding: 1px 8px; border-radius: 10px; font-weight: 600; }
+.marke-zustand.gruen { background: color-mix(in srgb, var(--gruen) 18%, transparent); color: var(--gruen); }
+.marke-zustand.gelb { background: color-mix(in srgb, var(--gelb) 18%, transparent); color: var(--gelb); }
+.marke-zustand.rot { background: color-mix(in srgb, var(--rot) 18%, transparent); color: var(--rot); }
+.marke-zustand.blau { background: color-mix(in srgb, var(--blau) 18%, transparent); color: var(--blau); }
+.zahl { font-size: 26px; font-weight: 700; } .zahl small { font-size: 13px; color: var(--leise); font-weight: 400; }
+table { width: 100%; border-collapse: collapse; background: var(--flaeche); border: 1px solid var(--rand); border-radius: 8px; overflow: hidden; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--rand); font-size: 13px; vertical-align: top; }
+th { color: var(--leise); font-weight: 600; background: color-mix(in srgb, var(--rand) 35%, transparent); }
+td.r, th.r { text-align: right; white-space: nowrap; }
+td.pfad { font-family: var(--mono); font-size: 12px; word-break: break-all; }
+.tabwrap { overflow-x: auto; }
+form.leiste { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+input, select, button { font: inherit; padding: 5px 8px; border: 1px solid var(--rand); border-radius: 6px;
+                        background: var(--flaeche); color: var(--text); }
+button { cursor: pointer; background: var(--akzent); color: #fff; border-color: var(--akzent); }
+pre.log { background: var(--flaeche); border: 1px solid var(--rand); border-radius: 8px; padding: 10px 12px;
+          font: 12.5px/1.5 var(--mono); white-space: pre-wrap; word-break: break-all; margin: 0; }
+pre.log .f { color: var(--rot); font-weight: 600; }
+.leise { color: var(--leise); font-size: 13px; }
+.zustand-zeile { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.punkt { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.punkt.gruen { background: var(--gruen); } .punkt.gelb { background: var(--gelb); } .punkt.None { background: var(--leise); }

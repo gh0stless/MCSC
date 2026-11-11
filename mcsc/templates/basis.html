@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block kopf %}{% endblock %}
+<title>MCSC{% block titel %}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='mcsc.css') }}">
+</head>
+<body>
+<header>
+  <div class="marke">MCSC<small>Media Collections Service Container</small></div>
+  <nav>
+    <a href="/" class="{{ 'an' if seite == 'uebersicht' }}">Übersicht</a>
+    <a href="/logs" class="{{ 'an' if seite == 'logs' }}">Logs</a>
+    <a href="/berichte" class="{{ 'an' if seite == 'berichte' }}">Berichte</a>
+  </nav>
+</header>
+<main>
+{% block inhalt %}{% endblock %}
+</main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>MCSC</Name>
+  <Repository>werkbank:1</Repository>
+  <Registry/>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview>MCSC – Media Collections Service Container: Web-Oberfläche der Werkbank (nur LAN, nur lesend). Gleiches lokal gebautes Image wie „werkbank“ – NICHT über „Update“ aktualisieren.</Overview>
+  <Category>Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8095]/</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/tools.png</Icon>
+  <ExtraParams>--restart unless-stopped --cpus=1 --memory=512m</ExtraParams>
+  <PostArgs>python3 /werkbank/skripte/mcsc/app.py</PostArgs>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Web-Port" Target="8095" Default="8095" Mode="tcp" Description="Web-Oberfläche" Type="Port" Display="always" Required="true" Mask="false">8095</Config>
+  <Config Name="Werkbank" Target="/werkbank" Default="/mnt/user/appdata/werkbank" Mode="ro" Description="Skripte, Datenbanken, Berichte, Logs (nur lesen)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/werkbank</Config>
+  <Config Name="Host-Logs" Target="/host/log" Default="/var/log" Mode="ro" Description="backup-wd.log (nur lesen)" Type="Path" Display="advanced" Required="false" Mask="false">/var/log</Config>
+  <Config Name="Host-Locks" Target="/host/lock" Default="/var/lock" Mode="ro" Description="Sperrdatei des WD-Backups" Type="Path" Display="advanced" Required="false" Mask="false">/var/lock</Config>
+  <Config Name="Host-Run" Target="/host/run" Default="/run" Mode="ro" Description="mover.pid" Type="Path" Display="advanced" Required="false" Mask="false">/run</Config>
+  <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Zeitzone" Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Berlin</Config>
+  <Config Name="Index-Pfadpräfix" Target="MCSC_SMB_PREFIX" Default="//server/media/" Mode="" Description="So erscheinen /media-Pfade in den Index-DBs (Freigabe, wie der PC sie sieht)" Type="Variable" Display="always" Required="false" Mask="false">//server/media/</Config>
+  <Config Name="Jellyfin-URL" Target="MCSC_JELLYFIN_URL" Default="http://jellyfin:8096" Mode="" Description="Jellyfin-Server (Cover für das MKV-Tagging)" Type="Variable" Display="always" Required="false" Mask="false">http://jellyfin:8096</Config>
+</Container>

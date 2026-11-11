@@ -1,0 +1,17 @@
+{% extends "basis.html" %}
+{% block titel %} · {{ name }}{% endblock %}
+{% block inhalt %}
+<form class="leiste" method="get">
+  <strong>{{ name }}</strong>
+  <input name="q" value="{{ q }}" placeholder="Zeilen filtern">
+  <button>Filtern</button>
+  <span class="leise">{{ gesamt }} Zeilen{% if gesamt > 2000 %}, die ersten 2000 angezeigt{% endif %} ·
+    <a href="/bericht/{{ name }}/download">herunterladen</a> · <a href="/berichte">alle Berichte</a></span>
+</form>
+<div class="tabwrap">
+<table>
+  <tr>{% for k in kopf %}<th>{{ k }}</th>{% endfor %}</tr>
+  {% for z in daten %}<tr>{% for x in z %}<td class="{{ 'pfad' if '/' in x or '\\' in x }}">{{ x }}</td>{% endfor %}</tr>{% endfor %}
+</table>
+</div>
+{% endblock %}

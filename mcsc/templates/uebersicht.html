@@ -1,0 +1,62 @@
+{% extends "basis.html" %}
+{% block kopf %}<meta http-equiv="refresh" content="60">{% endblock %}
+{% block inhalt %}
+<div class="zustand-zeile"><span class="punkt {{ ruhe[0] }}"></span>{{ ruhe[1] }}
+  <span class="leise" style="font-weight:400">· Stand {{ jetzt.strftime('%H:%M') }}, aktualisiert sich jede Minute</span></div>
+
+<h2>Jobs</h2>
+<div class="raster">
+{% for j in jobs %}
+  {% if j.da %}
+  <div class="karte {{ j.farbe }}">
+    <div class="kopf"><a href="/logs?datei={{ j.datei }}">{{ j.name }}</a>
+      <span><span class="marke-zustand {{ j.farbe }}">{{ j.zustand }}</span> <span class="zeit">{{ j.mtime|vor }}</span></span></div>
+    <div class="fazit">{{ j.fazit }}</div>
+    {% for f in j.fehler %}<div class="fehler">{{ f[:220] }}</div>{% endfor %}
+  </div>
+  {% else %}
+  <div class="karte grau"><div class="kopf">{{ j.name }}<span class="zeit">noch nie gelaufen</span></div></div>
+  {% endif %}
+{% endfor %}
+</div>
+
+<h2>Defekt-Check</h2>
+<div class="raster">
+{% if defekt is none %}
+  <div class="karte grau">Datenbank nicht lesbar</div>
+{% else %}
+  <div class="karte gruen"><div class="zahl">{{ defekt.get('ok', 0) }} <small>in Ordnung</small></div></div>
+  <div class="karte {{ 'gelb' if defekt.get('warnung') else 'gruen' }}"><div class="zahl">{{ defekt.get('warnung', 0) }} <small>Warnungen</small></div></div>
+  <div class="karte {{ 'rot' if defekt.get('defekt') else 'gruen' }}"><div class="zahl">{{ defekt.get('defekt', 0) }} <small>defekt</small></div></div>
+{% endif %}
+</div>
+
+<h2>WD-Backup</h2>
+<div class="raster">
+  <div class="karte {{ 'blau' if backup.laeuft else 'rot' if 'Fehler' in backup.ergebnis else 'gruen' if backup.da else 'grau' }}">
+    <div class="kopf">{{ 'läuft gerade' if backup.laeuft else 'letzter Lauf' }}</div>
+    {% if backup.laeuft %}<div class="fazit">jetzt: {{ backup.aktuell }}</div>{% endif %}
+    <div class="fazit">{% if backup.erg_zeit %}{{ backup.erg_zeit|vor }}: {% endif %}{{ backup.ergebnis or ('Log nicht erreichbar' if not backup.da else '') }}</div>
+    {% for platte, ts in backup.stempel %}<div class="fazit">Platte {{ platte }}: zuletzt fehlerfrei gesichert {{ ts|vor }}</div>{% endfor %}
+  </div>
+  {% if backup.abgleich %}
+  <div class="karte {{ 'blau' if backup.abgleich_laeuft else 'rot' if 'Fehler' in backup.abgleich else 'gruen' }}">
+    <div class="kopf"><a href="/logs?datei=host:wd-abgleich.log">WD-Abgleich (inplace)</a>
+      <span class="marke-zustand {{ 'blau' if backup.abgleich_laeuft else 'gruen' }}">{{ 'läuft' if backup.abgleich_laeuft else 'fertig' }}</span></div>
+    <div class="fazit">{{ backup.abgleich[:200] }}</div>
+  </div>
+  {% endif %}
+</div>
+
+<h2>Zeitplan</h2>
+<table>
+  <tr><th>Wann</th><th>Was</th></tr>
+  {% for wann, jobs_ in plan %}<tr><td>{{ wann }}</td><td>{{ jobs_|join(' → ') }}</td></tr>{% endfor %}
+</table>
+
+<h2>Datenbanken</h2>
+<table>
+  <tr><th>Datei</th><th class="r">Größe</th><th class="r">geändert</th></tr>
+  {% for f, g, m in dbs %}<tr><td>{{ f }}</td><td class="r">{{ g|groesse }}</td><td class="r">{{ m|vor }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

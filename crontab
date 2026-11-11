@@ -1,0 +1,7 @@
+# Werkbank-Zeitplan (supercronic, Zeitzone Europe/Berlin). Änderungen wirken nach Container-Neustart.
+# Format: Minute Stunde Tag Monat Wochentag Befehl
+#
+# Nachtlauf: erst die Indizes (Musik, Hörbücher, Videos – inkrementell, Stand nach db/stand/ für den PC),
+# danach Defekt-Check aller Videos (nur neue/geänderte Dateien; neue Dateien nur bis 07:00 anfangen).
+# Beides pausiert selbst, solange WD-Backup oder Mover laufen.
+0 22 * * * python3 /werkbank/skripte/index_lauf.py; python3 /werkbank/skripte/datei_check.py --bis 07:00

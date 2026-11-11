@@ -1,0 +1,19 @@
+{% extends "basis.html" %}
+{% block titel %} · Logs{% endblock %}
+{% block kopf %}<meta http-equiv="refresh" content="30">{% endblock %}
+{% block inhalt %}
+<form class="leiste" method="get">
+  <select name="datei" onchange="this.form.submit()">
+    {% for d in dateien %}<option {{ 'selected' if d == wahl }}>{{ d }}</option>{% endfor %}
+  </select>
+  <input name="q" value="{{ q }}" placeholder="Text filtern">
+  <label><input type="checkbox" name="fehler" value="1" {{ 'checked' if nur_fehler }} onchange="this.form.submit()"> nur Fehler</label>
+  <select name="n" onchange="this.form.submit()">
+    {% for x in (100, 300, 1000, 5000) %}<option value="{{ x }}" {{ 'selected' if x == n }}>{{ x }} Zeilen</option>{% endfor %}
+  </select>
+  <button>Anzeigen</button>
+  <span class="leise">neueste oben · geändert {{ mtime|vor }}</span>
+</form>
+<pre class="log">{% for z, f in zeilen %}{% if f %}<span class="f">{{ z }}</span>{% else %}{{ z }}{% endif %}
+{% else %}(keine Zeilen){% endfor %}</pre>
+{% endblock %}

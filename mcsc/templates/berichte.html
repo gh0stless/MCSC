@@ -1,0 +1,11 @@
+{% extends "basis.html" %}
+{% block titel %} · Berichte{% endblock %}
+{% block inhalt %}
+<table>
+  <tr><th>Bericht</th><th class="r">Größe</th><th class="r">erstellt</th><th></th></tr>
+  {% for f, g, m in liste %}
+  <tr><td><a href="/bericht/{{ f }}">{{ f }}</a></td><td class="r">{{ g|groesse }}</td><td class="r">{{ m|vor }}</td>
+      <td class="r"><a href="/bericht/{{ f }}/download">herunterladen</a></td></tr>
+  {% else %}<tr><td colspan="4">keine Berichte</td></tr>{% endfor %}
+</table>
+{% endblock %}
