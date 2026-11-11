@@ -84,7 +84,10 @@ SQLite and Python 3 (mutagen, numpy, Pillow, Flask, pyacoustid, requests, musicb
 1. ~~Dashboard: overview, logs, reports~~
 2. **Everything configurable:** one settings file (and a settings page in the dashboard) for libraries and
    their folders/types, which jobs run and when, time windows, pause rules, backup integration (optional),
-   Jellyfin connection – no assumptions about folder names or a specific setup left in the code
+   Jellyfin connection – no assumptions about folder names or a specific setup left in the code.
+   A **setup wizard** walks you through your own conventions once (library detection, folder/file naming,
+   tag grammar, collection rules, target formats, languages, providers, schedule) with a live preview on
+   real files from your collection, and writes a readable settings file
 3. **Mass transcoding** with profiles and verification before any original is removed: FLAC/WAV → MP3
    (tags and cover kept), CUE splitting, HandBrake/ffmpeg video profiles, surround extraction –
    with Intel Quick Sync (`/dev/dri`) where available
