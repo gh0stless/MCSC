@@ -96,6 +96,10 @@ SQLite and Python 3 (mutagen, numpy, Pillow, Flask, pyacoustid, requests, musicb
    *proposals* that are only applied after review. Chains for music (fingerprint → release match →
    length verification → tags/cover/ReplayGain), audiobooks (author/title/first year/genre/cover) and video
    (import with NFO, extras, rename plans, audio language detection). Curation rules become settings.
+   Further building blocks: synced lyrics (LRCLIB), BPM analysis, genre system, label/catalog number and
+   spelling normalization, placeholder covers, compilations, release split/merge, MP3 repair (mp3val, Xing
+   headers), version comparison, duplicate detection, final QA reports, a staging → library workflow with
+   collision checks, and an optional AI provider for judgments and descriptions (always as proposals)
 5. Search across all indexes, defect list, statistics
 6. Review lists in the browser (decide *keep / replace / delete* instead of passing CSV files around)
 7. Job queue: start jobs from the dashboard, executed by the job container with the same pause rules
