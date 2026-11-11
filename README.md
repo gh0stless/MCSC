@@ -85,10 +85,18 @@ SQLite and Python 3 (mutagen, numpy, Pillow, Flask, pyacoustid, requests, musicb
 2. **Everything configurable:** one settings file (and a settings page in the dashboard) for libraries and
    their folders/types, which jobs run and when, time windows, pause rules, backup integration (optional),
    Jellyfin connection – no assumptions about folder names or a specific setup left in the code
-3. Search across all indexes, defect list, statistics
-4. Review lists in the browser (decide *keep / replace / delete* instead of passing CSV files around)
-5. Job queue: start jobs from the dashboard, executed by the job container with the same pause rules
-6. **Unraid Community Applications release:** prebuilt image on `ghcr.io` (GitHub Actions), English UI,
+3. **Mass transcoding** with profiles and verification before any original is removed: FLAC/WAV → MP3
+   (tags and cover kept), CUE splitting, HandBrake/ffmpeg video profiles, surround extraction –
+   with Intel Quick Sync (`/dev/dri`) where available
+4. **Research toolchains** as modules: one provider layer (MusicBrainz, Discogs, AcoustID/Chromaprint,
+   Cover Art Archive, Audible, Wikipedia, TMDB/Jellyfin) with caching and rate limiting; results become
+   *proposals* that are only applied after review. Chains for music (fingerprint → release match →
+   length verification → tags/cover/ReplayGain), audiobooks (author/title/first year/genre/cover) and video
+   (import with NFO, extras, rename plans, audio language detection). Curation rules become settings.
+5. Search across all indexes, defect list, statistics
+6. Review lists in the browser (decide *keep / replace / delete* instead of passing CSV files around)
+7. Job queue: start jobs from the dashboard, executed by the job container with the same pause rules
+8. **Unraid Community Applications release:** prebuilt image on `ghcr.io` (GitHub Actions), English UI,
    CA template + support thread
 
 ## License
